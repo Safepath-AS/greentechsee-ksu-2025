@@ -39,17 +39,17 @@ export const AddProductDialogContent = ({
             label="Name"
             {...register("name", {
               required: "Navn må fylles ut",
-              // maxLength: {
-              //   message: "Navn kan ikke være lengre enn 50 tegn",
-              //   value: 50,
-              // },
+              maxLength: {
+                message: "Navn kan ikke være lengre enn 64 tegn",
+                value: 64,
+              },
             })}
             {...(errors.name && {
               error: true,
               helperText: errors.name.message,
               maxLength: {
-                message: "Modellnummer kan ikke være lengre enn 50 tegn",
-                value: 50,
+                message: "Modellnummer kan ikke være lengre enn 64 tegn",
+                value: 64,
               },
             })}
           />
