@@ -1,6 +1,6 @@
-# Prosjektnavn
+# My Things
 
-<url?>
+https://greentechsee-ksu-2025.norseye.com/
 
 ## Medlemmer
 
