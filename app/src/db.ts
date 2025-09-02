@@ -17,8 +17,8 @@ export type Tag = {
 export type CreateTag = Omit<Tag, "id">;
 
 export type Db = {
-  products: Product[];
-  tags: Tag[];
+  products?: Product[];
+  tags?: Tag[];
 };
 
 export const useDb = () => {

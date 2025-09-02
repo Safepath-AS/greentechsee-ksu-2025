@@ -9,6 +9,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { Fallback } from "./Fallback";
 import { theme } from "./theme";
 import { Home } from "./Home";
+import { ClearDbButton } from "./ClearDbButton";
 
 export const CONTAINER_MAX_WIDTH: Breakpoint = "md";
 
@@ -21,6 +22,7 @@ export const App = () => {
           <Home />
         </ErrorBoundary>
         <Typography>versjon {import.meta.env.VITE_VERSION}</Typography>
+        <ClearDbButton />
       </Container>
     </ThemeProvider>
   );
