@@ -1,44 +1,23 @@
-import { List, ListItem, IconButton, ListItemText, Fab } from "@mui/material";
+import { Fab } from "@mui/material";
 import { ErrorBoundary } from "react-error-boundary";
 import { AddProductDialogContent } from "./AddProductDialogContent";
 import { Fallback } from "./Fallback";
 import { useState } from "react";
 import { useDb } from "./db";
 import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { CONTAINER_MAX_WIDTH } from "./App";
 import { WindowDialog } from "./WindowDialog";
+import { ProductCard } from "./ProductCard";
 
 export const Home = () => {
-  const { products, deleteProduct } = useDb();
+  const { products } = useDb();
   const [addProductDialogOpen, setAddProductDialogOpen] = useState(false);
 
   return (
     <>
-      {products && (
-        <List>
-          {products.map(({ id, name, modelNumber }) => (
-            <ListItem
-              key={modelNumber}
-              secondaryAction={
-                <IconButton
-                  edge="end"
-                  aria-label="delete"
-                  onClick={() => deleteProduct(id)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              }
-              disablePadding
-            >
-              <ListItemText
-                primary={name}
-                secondary={`${modelNumber} (${id})`}
-              />
-            </ListItem>
-          ))}
-        </List>
-      )}
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
       <Fab
         color="primary"
         aria-label="add"
