@@ -37,16 +37,30 @@ export const AddProductDialogContent = ({
         <Stack spacing={2} sx={{ mt: 2 }}>
           <TextField
             label="Name"
-            {...register("name", { required: "Navn må fylles ut" })}
+            {...register("name", {
+              required: "Navn må fylles ut",
+              maxLength: {
+                message: "Navn kan ikke være lengre enn 64 tegn",
+                value: 64,
+              },
+            })}
             {...(errors.name && {
               error: true,
               helperText: errors.name.message,
+              maxLength: {
+                message: "Modellnummer kan ikke være lengre enn 64 tegn",
+                value: 64,
+              },
             })}
           />
           <TextField
             label="Model Number"
             {...register("modelNumber", {
               required: "Modellnummer må fylles ut",
+              maxLength: {
+                message: "Modellnummer kan ikke være lengre enn 50 tegn",
+                value: 50,
+              },
             })}
             {...(errors.modelNumber && {
               error: true,
