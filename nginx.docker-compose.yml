@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  # nginx-proxy is used to route traffic to internal applications by using a reverse proxy.
+  # This is what enables the support for multiple applications routed to the same ports,
+  # under unique domain names
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    networks:
+      - nginx-proxy-network
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - dhparam:/etc/nginx/dhparam
+      - certs:/etc/nginx/certs:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  # acme-companion is used to automatically generate SSL certificates using Let's Encrypt
+  # for the applications proxied by nginx-proxy
+  acme-companion:
+    image: nginxproxy/acme-companion
+    networks:
+      - nginx-proxy-network
+    restart: always
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - certs:/etc/nginx/certs/:rw
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+volumes:
+  conf:
+  vhost:
+  html:
+  dhparam:
+  certs:
+  acme:
+
+# Define a new network in docker that all applications can use to communicate with the
+# nginx-proxy and acme-companion containers
+networks:
+  nginx-proxy-network:
+    name: nginx-proxy-network

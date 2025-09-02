@@ -1,0 +1,19 @@
+services:
+  app:
+    image: ghcr.io/safepath-as/greentechsee-ksu-2025/app:latest
+    # Use the same network as the nginx-proxy and acme-companion containers
+    # so that they can route traffic to this container
+    networks:
+      - nginx-proxy-network
+    restart: always
+    environment:
+      # VIRTUAL_HOST and LETSENCRYPT_HOST are set to the public domain name
+      # defined in the .env file, and are used by the nginx-proxy and acme-companion
+      # containers to route traffic and generate SSL certificates
+      - VIRTUAL_HOST=${APP_HOST}
+      - LETSENCRYPT_HOST=${APP_HOST}
+
+# Declare the external network as defined in nginx.docker-compose.yml
+networks:
+  nginx-proxy-network:
+    external: true
