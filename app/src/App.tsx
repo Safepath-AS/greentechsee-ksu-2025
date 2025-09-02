@@ -14,6 +14,8 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useState } from "react";
 import { AddProductDialogContent } from "./AddProductDialogContent";
+import { ErrorBoundary } from "react-error-boundary";
+import { Fallback } from "./Fallback";
 
 export const App = () => {
   const { products, deleteProduct } = useDb();
@@ -22,55 +24,58 @@ export const App = () => {
   return (
     <Container>
       <CssBaseline />
-      yo
-      {products && (
-        <List>
-          {products.map(({ id, name, modelNumber }) => (
-            <ListItem
-              key={modelNumber}
-              secondaryAction={
-                <IconButton
-                  edge="end"
-                  aria-label="delete"
-                  onClick={() => deleteProduct(id)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              }
-              disablePadding
-            >
-              <ListItemText
-                primary={name}
-                secondary={`${modelNumber} (${id})`}
-              />
-            </ListItem>
-          ))}
-        </List>
-      )}
-      <Typography>versjon {import.meta.env.VITE_VERSION}</Typography>
-      <Fab
-        color="primary"
-        aria-label="add"
-        sx={{
-          position: "absolute",
-          bottom: 16,
-          right: 16,
-        }}
-        onClick={() => setAddProductDialogOpen(true)}
-        variant="extended"
-      >
-        <AddIcon />
-        Add Product
-      </Fab>
-      <Dialog
-        fullScreen
-        open={addProductDialogOpen}
-        onClose={() => setAddProductDialogOpen(false)}
-      >
-        <AddProductDialogContent
+      <ErrorBoundary FallbackComponent={Fallback}>
+        {products && (
+          <List>
+            {products.map(({ id, name, modelNumber }) => (
+              <ListItem
+                key={modelNumber}
+                secondaryAction={
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => deleteProduct(id)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                }
+                disablePadding
+              >
+                <ListItemText
+                  primary={name}
+                  secondary={`${modelNumber} (${id})`}
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
+        <Typography>versjon {import.meta.env.VITE_VERSION}</Typography>
+        <Fab
+          color="primary"
+          aria-label="add"
+          sx={{
+            position: "absolute",
+            bottom: 16,
+            right: 16,
+          }}
+          onClick={() => setAddProductDialogOpen(true)}
+          variant="extended"
+        >
+          <AddIcon />
+          Legg til produkt
+        </Fab>
+        <Dialog
+          fullScreen
+          open={addProductDialogOpen}
           onClose={() => setAddProductDialogOpen(false)}
-        />
-      </Dialog>
+        >
+          <ErrorBoundary FallbackComponent={Fallback}>
+            <AddProductDialogContent
+              onClose={() => setAddProductDialogOpen(false)}
+            />
+          </ErrorBoundary>
+        </Dialog>
+      </ErrorBoundary>
     </Container>
   );
 };
