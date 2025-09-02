@@ -1,6 +1,7 @@
 import {
   Container,
   CssBaseline,
+  Dialog,
   Fab,
   IconButton,
   List,
@@ -11,9 +12,12 @@ import {
 import { useDb } from "./db";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useState } from "react";
+import { AddProductDialogContent } from "./AddProductDialogContent";
 
 export const App = () => {
-  const { products, addProduct, deleteProduct } = useDb();
+  const { products, deleteProduct } = useDb();
+  const [addProductDialogOpen, setAddProductDialogOpen] = useState(false);
 
   return (
     <Container>
@@ -35,7 +39,10 @@ export const App = () => {
               }
               disablePadding
             >
-              <ListItemText primary={name} secondary={modelNumber} />
+              <ListItemText
+                primary={name}
+                secondary={`${modelNumber} (${id})`}
+              />
             </ListItem>
           ))}
         </List>
@@ -49,17 +56,21 @@ export const App = () => {
           bottom: 16,
           right: 16,
         }}
-        onClick={() =>
-          addProduct({
-            modelNumber: `model-${Date.now()}`,
-            name: `Product ${Date.now()}`,
-          })
-        }
+        onClick={() => setAddProductDialogOpen(true)}
         variant="extended"
       >
         <AddIcon />
         Add Product
       </Fab>
+      <Dialog
+        fullScreen
+        open={addProductDialogOpen}
+        onClose={() => setAddProductDialogOpen(false)}
+      >
+        <AddProductDialogContent
+          onClose={() => setAddProductDialogOpen(false)}
+        />
+      </Dialog>
     </Container>
   );
 };

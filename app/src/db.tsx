@@ -1,10 +1,11 @@
 import { useLocalStorage } from "@uidotdev/usehooks";
 
-type Product = {
+export type Product = {
   id: string;
   modelNumber: string;
   name: string;
 };
+export type CreateProduct = Omit<Product, "id">;
 
 type Db = {
   products: Product[];
@@ -14,7 +15,7 @@ export const useDb = () => {
   const [db, setDb] = useLocalStorage<Db>("db");
 
   const products = db?.products || [];
-  const addProduct = (product: Omit<Product, "id">) => {
+  const addProduct = (product: CreateProduct) => {
     setDb({
       ...db,
       products: [...products, { ...product, id: createId() }],
