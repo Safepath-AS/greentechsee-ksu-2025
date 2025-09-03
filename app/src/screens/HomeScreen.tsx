@@ -1,20 +1,45 @@
 import AddIcon from "@mui/icons-material/Add";
-import { Fab } from "@mui/material";
-import { useContext } from "react";
+import { Fab, Grid } from "@mui/material";
+import { useContext, useState } from "react";
 import { CONTAINER_MAX_WIDTH } from "../App";
 import { useDb } from "../db";
 import { ProductCard } from "../ProductCard";
 import { ScreenContext } from "../ScreenContext";
+import { TagFilter } from "../TagFilter";
 
 export const HomeScreen = () => {
   const { products } = useDb();
   const { setAddProductDialogOpen } = useContext(ScreenContext);
+  const [tagIds, setTagIds] = useState<string[]>([]);
 
   return (
     <>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+      <Grid container spacing={2}>
+        <Grid>
+          <TagFilter tagIds={tagIds} onChange={setTagIds} />
+        </Grid>
+        {products
+          .filter(
+            (product) =>
+              tagIds.length === 0 ||
+              tagIds.every((tagId) => product.tagIds.includes(tagId))
+          )
+          .map((product) => (
+            <Grid key={product.id} size={12}>
+              <ProductCard
+                key={product.id}
+                product={product}
+                onTagClick={(tagId) => {
+                  if (tagIds.includes(tagId)) {
+                    setTagIds(tagIds.filter((t) => t !== tagId));
+                  } else {
+                    setTagIds([...(tagIds || []), tagId]);
+                  }
+                }}
+              />
+            </Grid>
+          ))}
+      </Grid>
       <Fab
         color="primary"
         aria-label="add"

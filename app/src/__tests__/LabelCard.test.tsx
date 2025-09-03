@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { LabelCard } from "../LabelCard";
+import { LabelCard } from "../TagFilter";
 
 describe("Fallback", () => {
   beforeEach(() => {

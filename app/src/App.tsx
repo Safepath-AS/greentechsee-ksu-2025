@@ -9,10 +9,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { ClearDbButton } from "./ClearDbButton";
+import { DbToolButtons } from "./DbToolButtons";
 import { Fallback } from "./Fallback";
 import { HeaderBar } from "./HeaderBar";
-import { LabelCard } from "./LabelCard";
 import { Screen } from "./Screen";
 import { ScreenContext } from "./ScreenContext";
 import { theme } from "./theme";
@@ -39,7 +38,6 @@ export const App = () => {
         <Container maxWidth={CONTAINER_MAX_WIDTH}>
           <CssBaseline />
           <ErrorBoundary FallbackComponent={Fallback}>
-            <LabelCard />
             <ScreenContext.Provider
               value={{
                 addProductDialogOpen: screens.addProduct,
@@ -54,7 +52,7 @@ export const App = () => {
           <Typography sx={{ marginTop: 4 }}>
             versjon {import.meta.env.VITE_VERSION}
           </Typography>
-          <ClearDbButton />
+          <DbToolButtons />
         </Container>
       </LocalizationProvider>
     </ThemeProvider>
