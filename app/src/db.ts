@@ -1,6 +1,6 @@
 import { useLocalStorage } from "@uidotdev/usehooks";
 
-const MAX_PRODUCT_SIZE = 1024; // in bytes
+const MAX_PRODUCT_SIZE = 1024 * 1024 * 8; // 8 MB
 
 export type Product = {
   id: string;

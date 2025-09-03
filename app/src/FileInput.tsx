@@ -14,9 +14,10 @@ export const FileInput = ({ onChange, ...props }: FileInputProps) => {
     <>
       <MuiFileInput
         value={file}
-        onChange={(file) => {
+        onChange={async (file) => {
           setFile(file || undefined);
-          onChange?.(file ? URL.createObjectURL(file) : "");
+          // Base 64
+          onChange?.((await toBase64(file!)) as string);
         }}
         {...props}
       />
@@ -30,3 +31,11 @@ export const FileInput = ({ onChange, ...props }: FileInputProps) => {
     </>
   );
 };
+
+const toBase64 = (file: File) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+  });
