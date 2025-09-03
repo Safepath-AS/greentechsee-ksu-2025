@@ -54,6 +54,9 @@ export const AddProductScreen = ({ onClose, onAdd }: AddProductScreenProps) => {
                       accept: "image/*",
                     },
                   }}
+                  sx={{
+                    display: "none",
+                  }}
                   helperText={
                     fieldState.invalid
                       ? fieldState.error?.message || "Dårlig fil"

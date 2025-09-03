@@ -1,4 +1,4 @@
-import { CardMedia } from "@mui/material";
+import { CardMedia, Paper, Typography } from "@mui/material";
 import { MuiFileInput, type MuiFileInputProps } from "mui-file-input";
 import { useState } from "react";
 import { toBase64 } from "./utils";
@@ -13,7 +13,47 @@ export const FileInput = ({ onChange, ...props }: FileInputProps) => {
 
   return (
     <>
+      <Paper
+        component="label"
+        htmlFor="fileInput"
+        variant="outlined"
+        sx={{
+          height: 200,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          borderStyle: "dashed",
+          transition: (theme) =>
+            theme.transitions.create("border", {
+              duration: theme.transitions.duration.shorter,
+            }),
+        }}
+      >
+        {file ? (
+          <CardMedia
+            component="img"
+            image={file ? URL.createObjectURL(file) : ""}
+            sx={{
+              width: "50%",
+            }}
+          />
+        ) : (
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 400,
+            }}
+            onDragEnter={(e) => {
+              e.preventDefault();
+            }}
+          >
+            Last opp fil
+          </Typography>
+        )}
+      </Paper>
       <MuiFileInput
+        id="fileInput"
         value={file}
         onChange={async (file) => {
           setFile(file || undefined);
@@ -21,13 +61,6 @@ export const FileInput = ({ onChange, ...props }: FileInputProps) => {
           onChange?.((await toBase64(file!)) as string);
         }}
         {...props}
-      />
-      <CardMedia
-        component="img"
-        image={file ? URL.createObjectURL(file) : ""}
-        sx={{
-          width: "50%",
-        }}
       />
     </>
   );
