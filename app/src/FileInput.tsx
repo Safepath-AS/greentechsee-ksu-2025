@@ -48,6 +48,7 @@ export const FileInput = ({ onChange, ...props }: FileInputProps) => {
           </Typography>
         )}
       </Paper>
+      {/* @ts-expect-error Idiot library */}
       <MuiFileInput
         id="fileInput"
         value={file}

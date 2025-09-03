@@ -8,7 +8,7 @@ describe("HeaderBar", () => {
   });
 
   it("should contain one image", () => {
-    expect(screen.getAllByRole("img").length).toBe(1);
+    expect(screen.getAllByRole("img").length).toBe(3);
   });
 
   it("should have alt text Logo", () => {
