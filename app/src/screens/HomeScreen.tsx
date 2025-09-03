@@ -1,5 +1,5 @@
 import AddIcon from "@mui/icons-material/Add";
-import { Fab, Grid } from "@mui/material";
+import { Fab, Grid, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import { CONTAINER_MAX_WIDTH } from "../App";
 import { useDb } from "../db";
@@ -15,6 +15,14 @@ export const HomeScreen = () => {
   return (
     <>
       <Grid container spacing={2}>
+        <Grid size={12}>
+          <Typography
+            variant="h3"
+            sx={{ fontSize: 25, marginTop: 4, fontWeight: "bold" }}
+          >
+            Dine gjenstander
+          </Typography>
+        </Grid>
         <Grid>
           <TagFilter tagIds={tagIds} onChange={setTagIds} />
         </Grid>
