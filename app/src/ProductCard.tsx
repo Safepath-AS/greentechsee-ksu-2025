@@ -26,16 +26,16 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         }}
       />
       <CardContent>
-        <Typography variant="h3" sx={{ fontSize: 15 }}>
+        <Typography variant="h3" sx={{ fontSize: 20 }}>
           {product.name}
         </Typography>
-        <Typography variant="h4" sx={{ fontSize: 10 }}>
+        <Typography variant="h4" sx={{ fontSize: 13.5 }}>
           Kjøpt: {Date.parse(product.id)} <br />
           EAN: ee <br />
           Artikkelnummer: {product.modelNumber} <br />
-          Serie: {Date.parse(product.id)}
+          Serie: Drillserie
         </Typography>
-        <Typography variant="h6" sx={{ fontSize: 10, color: "gray" }}>
+        <Typography variant="h6" sx={{ fontSize: 13.5, color: "gray" }}>
           desc this is a description lalalalalala
         </Typography>
       </CardContent>
