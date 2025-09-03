@@ -40,8 +40,10 @@ export const ProductCard = ({ product, onTagClick }: ProductCardProps) => {
         component="img"
         image={product.imageData}
         sx={{
-          width: "40%",
-          maxHeight: 100,
+          aspectRatio: "1 / 1",
+          flexShrink: 0,
+          objectFit: "cover",
+          width: 125,
         }}
       />
       <Box sx={{ display: "flex", flexDirection: "column" }}>
