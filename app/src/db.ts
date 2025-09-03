@@ -5,8 +5,11 @@ const MAX_PRODUCT_SIZE = 1024; // in bytes
 export type Product = {
   id: string;
   modelNumber: string;
+  modelSpecification: string;
   name: string;
+  description: string;
   tagIds: string[];
+  ean: string;
 };
 export type CreateProduct = Omit<Product, "id">;
 

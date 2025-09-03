@@ -1,4 +1,4 @@
-import { Fab } from "@mui/material";
+import { Fab, Grid } from "@mui/material";
 import { ErrorBoundary } from "react-error-boundary";
 import { AddProductDialogContent } from "./AddProductDialogContent";
 import { Fallback } from "./Fallback";
@@ -8,6 +8,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { CONTAINER_MAX_WIDTH } from "./App";
 import { WindowDialog } from "./WindowDialog";
 import { ProductCard } from "./ProductCard";
+import { LabelCard } from "./LabelCard";
 
 export const Home = () => {
   const { products } = useDb();
@@ -15,9 +16,16 @@ export const Home = () => {
 
   return (
     <>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+      <Grid container spacing={2}>
+        <Grid>
+          <LabelCard />
+        </Grid>
+        {products.map((product) => (
+          <Grid key={product.id}>
+            <ProductCard key={product.id} product={product} />
+          </Grid>
+        ))}
+      </Grid>
       <Fab
         color="primary"
         aria-label="add"

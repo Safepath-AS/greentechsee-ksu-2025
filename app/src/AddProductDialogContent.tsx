@@ -54,7 +54,7 @@ export const AddProductDialogContent = ({
             })}
           />
           <TextField
-            label="Model Number"
+            label="Modellnummer"
             {...register("modelNumber", {
               required: "Modellnummer må fylles ut",
               maxLength: {
@@ -65,6 +65,34 @@ export const AddProductDialogContent = ({
             {...(errors.modelNumber && {
               error: true,
               helperText: errors.modelNumber.message,
+            })}
+          />
+          <TextField
+            label="Modellspesifikasjon"
+            {...register("modelSpecification", {
+              maxLength: {
+                message:
+                  "Modellspesifikasjon kan ikke være lengre enn 200 tegn",
+                value: 200,
+              },
+            })}
+            {...(errors.modelSpecification && {
+              error: true,
+              helperText: errors.modelSpecification.message,
+            })}
+          />
+          <TextField
+            label="Description"
+            {...(register("description"),
+            {
+              maxLength: {
+                message: "Beskrivelse kan ikke være lengre enn 500 tegn",
+                value: 500,
+              },
+            })}
+            {...(errors.description && {
+              error: true,
+              helperText: errors.description.message,
             })}
           />
         </Stack>
