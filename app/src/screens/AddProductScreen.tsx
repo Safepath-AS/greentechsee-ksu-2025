@@ -43,12 +43,17 @@ export const AddProductScreen = ({ onClose, onAdd }: AddProductScreenProps) => {
           <Controller
             control={control}
             name="imageData"
-            rules={{ required: true }}
+            rules={{ required: "Bilde er påkrevd" }}
             render={({ field, fieldState }) => {
               return (
                 <FileInput
                   {...field}
                   label="Bilde"
+                  slotProps={{
+                    htmlInput: {
+                      accept: "image/*",
+                    },
+                  }}
                   helperText={
                     fieldState.invalid
                       ? fieldState.error?.message || "Dårlig fil"
@@ -123,14 +128,22 @@ export const AddProductScreen = ({ onClose, onAdd }: AddProductScreenProps) => {
             control={control}
             name="boughtAt"
             rules={{ required: true }}
-            render={({ field }) => {
+            render={({ field, fieldState }) => {
               return (
                 <DateTimePicker
                   label="Dato kjøpt"
-                  value={dayjs(field.value)}
+                  value={field.value ? dayjs(field.value) : undefined}
                   inputRef={field.ref}
                   onChange={(date) => {
                     field.onChange(date?.toISOString());
+                  }}
+                  slotProps={{
+                    textField: {
+                      error: fieldState.invalid,
+                      helperText: fieldState.invalid
+                        ? "Dato kjøpt må fylles ut"
+                        : "",
+                    },
                   }}
                 />
               );
