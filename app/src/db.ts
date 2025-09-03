@@ -11,7 +11,7 @@ export type Product = {
   articleNumber: string;
   series: string;
   boughtAt: string; // ISO date string
-  tagIds: string[];
+  tagIds?: string[];
   imageData?: string;
 };
 export type CreateProduct = Omit<Product, "id">;
