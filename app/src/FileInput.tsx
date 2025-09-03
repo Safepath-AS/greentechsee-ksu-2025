@@ -23,11 +23,7 @@ export const FileInput = ({ onChange, ...props }: FileInputProps) => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          borderStyle: "dashed",
-          transition: (theme) =>
-            theme.transitions.create("border", {
-              duration: theme.transitions.duration.shorter,
-            }),
+          borderColor: (theme) => theme.palette.grey[400],
         }}
       >
         {file ? (
