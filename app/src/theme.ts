@@ -4,6 +4,7 @@ export const theme = createTheme({
   shape: {
     borderRadius: 12,
   },
+  typography: { fontFamily: ["Atkinson Hyperlegible", "italic"].join(",") },
   components: {
     MuiButton: {
       styleOverrides: {
