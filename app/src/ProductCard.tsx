@@ -1,4 +1,5 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import dayjs from "dayjs";
 import type { Product } from "./db";
 
 export type ProductCardProps = {
@@ -30,9 +31,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           {product.name}
         </Typography>
         <Typography variant="h4" sx={{ fontSize: 13.5 }}>
-          Kjøpt: {product.boughtAt} <br />
+          Kjøpt: {dayjs(product.boughtAt).format("YYYY/MM/DD HH:mm")} <br />
           EAN: {product.ean} <br />
-          Artikkelnummer: {product.tagIds} <br />
+          Artikkelnummer: {product.articleNumber} <br />
           Serie: {product.series}
         </Typography>
         <Typography variant="h6" sx={{ fontSize: 13.5, color: "gray" }}>
