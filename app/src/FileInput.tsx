@@ -1,8 +1,8 @@
+import UploadIcon from "@mui/icons-material/Upload";
 import { CardMedia, Paper, Typography } from "@mui/material";
 import { MuiFileInput, type MuiFileInputProps } from "mui-file-input";
 import { useState } from "react";
 import { toBase64 } from "./utils";
-
 export interface FileInputProps
   extends Omit<MuiFileInputProps, "value" | "onChange"> {
   onChange?: (fileData: string) => void;
@@ -24,6 +24,7 @@ export const FileInput = ({ onChange, ...props }: FileInputProps) => {
           justifyContent: "center",
           alignItems: "center",
           borderColor: (theme) => theme.palette.grey[400],
+          cursor: "pointer",
         }}
       >
         {file ? (
@@ -45,6 +46,7 @@ export const FileInput = ({ onChange, ...props }: FileInputProps) => {
             }}
           >
             Last opp fil
+            <UploadIcon sx={{ verticalAlign: "middle" }} />
           </Typography>
         )}
       </Paper>
