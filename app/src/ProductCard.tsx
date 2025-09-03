@@ -1,7 +1,7 @@
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
-import type { Product } from "./db";
-import type { JSX } from "react";
 import dayjs from "dayjs";
+import type { JSX } from "react";
+import type { Product } from "./db";
 
 export type ProductCardProps = {
   product: Product;
@@ -29,7 +29,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     >
       <CardMedia
         component="img"
-        image="https://www.thegoodlifecentre.co.uk/wp-content/uploads/2022/10/Standard-Drill-600x343.png"
+        image={product.imageData}
         sx={{
           width: "50%",
         }}
@@ -45,11 +45,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             )}
             <Field
               label="Kjøpt"
-              value={dayjs(new Date(product.id)).format("DD.MM.YYYY")}
+              value={dayjs(product.boughtAt).format("YYYY/MM/DD")}
             />
             {product.ean && <Field label="EAN" value={product.ean} />}
-            {product.modelNumber && (
-              <Field label="Artikkelnummer" value={product.modelNumber} />
+            {product.articleNumber && (
+              <Field label="Artikkelnummer" value={product.articleNumber} />
             )}
             {product.modelSpecification && (
               <Field label="Serie" value={product.modelSpecification} />
