@@ -20,7 +20,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     >
       <CardMedia
         component="img"
-        image="https://www.thegoodlifecentre.co.uk/wp-content/uploads/2022/10/Standard-Drill-600x343.png"
+        image={product.imageData}
         sx={{
           width: "50%",
         }}
@@ -30,13 +30,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           {product.name}
         </Typography>
         <Typography variant="h4" sx={{ fontSize: 13.5 }}>
-          Kjøpt: {new Date(product.boughtAt).toISOString()} <br />
-          EAN: ee <br />
-          Artikkelnummer: {product.modelNumber} <br />
-          Serie: Drillserie
+          Kjøpt: {product.boughtAt} <br />
+          EAN: {product.ean} <br />
+          Artikkelnummer: {product.tagIds} <br />
+          Serie: {product.series}
         </Typography>
         <Typography variant="h6" sx={{ fontSize: 13.5, color: "gray" }}>
-          desc this is a description lalalalalala
+          {product.description}
         </Typography>
       </CardContent>
     </Card>
