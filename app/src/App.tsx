@@ -5,6 +5,8 @@ import {
   Typography,
   type Breakpoint,
 } from "@mui/material";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { ClearDbButton } from "./ClearDbButton";
@@ -32,27 +34,29 @@ export const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <HeaderBar />
-      <Container maxWidth={CONTAINER_MAX_WIDTH}>
-        <CssBaseline />
-        <ErrorBoundary FallbackComponent={Fallback}>
-          <LabelCard />
-          <ScreenContext.Provider
-            value={{
-              addProductDialogOpen: screens.addProduct,
-              setAddProductDialogOpen,
-              addTagDialogOpen: screens.addTag,
-              setAddTagDialogOpen,
-            }}
-          >
-            <Screen />
-          </ScreenContext.Provider>
-        </ErrorBoundary>
-        <Typography sx={{ marginTop: 4 }}>
-          versjon {import.meta.env.VITE_VERSION}
-        </Typography>
-        <ClearDbButton />
-      </Container>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <HeaderBar />
+        <Container maxWidth={CONTAINER_MAX_WIDTH}>
+          <CssBaseline />
+          <ErrorBoundary FallbackComponent={Fallback}>
+            <LabelCard />
+            <ScreenContext.Provider
+              value={{
+                addProductDialogOpen: screens.addProduct,
+                setAddProductDialogOpen,
+                addTagDialogOpen: screens.addTag,
+                setAddTagDialogOpen,
+              }}
+            >
+              <Screen />
+            </ScreenContext.Provider>
+          </ErrorBoundary>
+          <Typography sx={{ marginTop: 4 }}>
+            versjon {import.meta.env.VITE_VERSION}
+          </Typography>
+          <ClearDbButton />
+        </Container>
+      </LocalizationProvider>
     </ThemeProvider>
   );
 };
