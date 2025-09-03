@@ -135,6 +135,10 @@ export const AddProductScreen = ({ onClose, onAdd }: AddProductScreenProps) => {
                   value={field.value ? dayjs(field.value) : undefined}
                   inputRef={field.ref}
                   onChange={(date) => {
+                    if (!date?.isValid()) {
+                      return;
+                    }
+                    console.log(date);
                     field.onChange(date?.toISOString());
                   }}
                   slotProps={{
