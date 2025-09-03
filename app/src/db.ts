@@ -4,9 +4,14 @@ const MAX_PRODUCT_SIZE = 1024; // in bytes
 
 export type Product = {
   id: string;
-  modelNumber: string;
   name: string;
+  description?: string;
+  ean: string;
+  articleNumber: string;
+  series: string;
+  boughtAt: string; // ISO date string
   tagIds: string[];
+  imageData?: string;
 };
 export type CreateProduct = Omit<Product, "id">;
 
@@ -30,10 +35,14 @@ export const useDb = () => {
     if (JSON.stringify(product).length > MAX_PRODUCT_SIZE) {
       throw new ValidationError("Produktet er for stort");
     }
+
+    const newProduct = { ...product, id: createId() };
     setDb({
       ...db,
-      products: [...products, { ...product, id: createId() }],
+      products: [...products, newProduct],
     });
+
+    return newProduct;
   };
   const deleteProduct = (id: string) => {
     setDb({
@@ -48,10 +57,14 @@ export const useDb = () => {
     if (JSON.stringify(tag).length > MAX_PRODUCT_SIZE) {
       throw new ValidationError("Tagget er for stort");
     }
+
+    const newTag = { ...tag, id: createId() };
     setDb({
       ...db,
-      tags: [...tags, { ...tag, id: createId() }],
+      tags: [...tags, newTag],
     });
+
+    return newTag;
   };
   const deleteTag = (id: string) => {
     setDb({

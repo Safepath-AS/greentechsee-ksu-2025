@@ -3,27 +3,30 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Input,
   Stack,
   TextField,
 } from "@mui/material";
-import { useDb, type CreateProduct } from "./db";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import { useDb, type CreateProduct, type Product } from "../db";
+import { TagsInput } from "../TagsInput";
 
-export interface AddProductDialogContentProps {
+export interface AddProductScreenProps {
   onClose?: () => void;
+  onAdd?: (product: Product) => void;
 }
 
-export const AddProductDialogContent = ({
-  onClose,
-}: AddProductDialogContentProps) => {
+export const AddProductScreen = ({ onClose, onAdd }: AddProductScreenProps) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<CreateProduct>();
   const { addProduct } = useDb();
   const submit = (product: CreateProduct) => {
-    addProduct(product);
+    const newProduct = addProduct(product);
+    onAdd?.(newProduct);
     onClose?.();
   };
   const cancel = () => {
@@ -35,12 +38,13 @@ export const AddProductDialogContent = ({
       <DialogTitle>Legg til en ting</DialogTitle>
       <DialogContent>
         <Stack spacing={2} sx={{ mt: 2 }}>
+          <Input type="file" inputProps={{ accept: "image/*" }} />
           <TextField
-            label="Name"
+            label="Tittel"
             {...register("name", {
-              required: "Navn må fylles ut",
+              required: "Tittel må fylles ut",
               maxLength: {
-                message: "Navn kan ikke være lengre enn 64 tegn",
+                message: "Tittel kan ikke være lengre enn 64 tegn",
                 value: 64,
               },
             })}
@@ -66,6 +70,11 @@ export const AddProductDialogContent = ({
               error: true,
               helperText: errors.modelNumber.message,
             })}
+          />
+          <Controller
+            control={control}
+            name="tagIds"
+            render={({ field }) => <TagsInput {...field} />}
           />
         </Stack>
       </DialogContent>
