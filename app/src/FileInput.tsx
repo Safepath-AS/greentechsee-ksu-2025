@@ -1,6 +1,6 @@
+import { CardMedia } from "@mui/material";
 import { MuiFileInput, type MuiFileInputProps } from "mui-file-input";
 import { useState } from "react";
-import { FileDataView } from "./FileDataView";
 
 export interface FileInputProps
   extends Omit<MuiFileInputProps, "value" | "onChange"> {
@@ -20,7 +20,13 @@ export const FileInput = ({ onChange, ...props }: FileInputProps) => {
         }}
         {...props}
       />
-      <FileDataView value={file ? URL.createObjectURL(file) : ""} />
+      <CardMedia
+        component="img"
+        image={file ? URL.createObjectURL(file) : ""}
+        sx={{
+          width: "50%",
+        }}
+      />
     </>
   );
 };
