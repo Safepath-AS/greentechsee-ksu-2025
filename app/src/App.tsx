@@ -10,12 +10,14 @@ import { Fallback } from "./Fallback";
 import { theme } from "./theme";
 import { Home } from "./Home";
 import { ClearDbButton } from "./ClearDbButton";
+import { HeaderBar } from "./HeaderBar";
 
 export const CONTAINER_MAX_WIDTH: Breakpoint = "md";
 
 export const App = () => {
   return (
     <ThemeProvider theme={theme}>
+      <HeaderBar />
       <Container maxWidth={CONTAINER_MAX_WIDTH}>
         <CssBaseline />
         <ErrorBoundary FallbackComponent={Fallback}>
