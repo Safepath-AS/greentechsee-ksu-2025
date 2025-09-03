@@ -6,7 +6,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { Controller, useForm } from "react-hook-form";
 import { useDb, type CreateProduct, type Product } from "../db";
@@ -130,11 +130,15 @@ export const AddProductScreen = ({ onClose, onAdd }: AddProductScreenProps) => {
             rules={{ required: true }}
             render={({ field, fieldState }) => {
               return (
-                <DateTimePicker
+                <DatePicker
                   label="Dato kjøpt"
                   value={field.value ? dayjs(field.value) : undefined}
                   inputRef={field.ref}
                   onChange={(date) => {
+                    if (!date?.isValid()) {
+                      return;
+                    }
+                    console.log(date);
                     field.onChange(date?.toISOString());
                   }}
                   slotProps={{

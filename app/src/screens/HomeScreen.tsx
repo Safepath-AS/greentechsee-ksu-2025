@@ -1,8 +1,9 @@
 import AddIcon from "@mui/icons-material/Add";
-import { Fab } from "@mui/material";
+import { Fab, Grid } from "@mui/material";
 import { useContext } from "react";
 import { CONTAINER_MAX_WIDTH } from "../App";
 import { useDb } from "../db";
+import { LabelCard } from "../LabelCard";
 import { ProductCard } from "../ProductCard";
 import { ScreenContext } from "../ScreenContext";
 
@@ -12,9 +13,16 @@ export const HomeScreen = () => {
 
   return (
     <>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+      <Grid container spacing={2}>
+        <Grid>
+          <LabelCard />
+        </Grid>
+        {products.map((product) => (
+          <Grid key={product.id} size={12}>
+            <ProductCard key={product.id} product={product} />
+          </Grid>
+        ))}
+      </Grid>
       <Fab
         color="primary"
         aria-label="add"

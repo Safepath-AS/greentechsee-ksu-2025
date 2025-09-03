@@ -4,6 +4,7 @@ const MAX_PRODUCT_SIZE = 1024 * 1024 * 8; // 8 MB
 
 export type Product = {
   id: string;
+  modelSpecification: string;
   name: string;
   description?: string;
   ean: string;

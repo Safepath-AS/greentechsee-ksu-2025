@@ -1,7 +1,7 @@
-import { Box, Toolbar, IconButton } from "@mui/material";
+import { Box, IconButton, Toolbar } from "@mui/material";
 import MyThingsLogo from "./images/MyThings-logo.svg";
-import Profile from "./images/Profile.svg";
 import Notification from "./images/Notification.svg";
+import Profile from "./images/Profile.svg";
 
 export const HeaderBar = () => {
   return (
