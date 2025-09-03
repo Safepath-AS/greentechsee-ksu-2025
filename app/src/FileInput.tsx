@@ -33,6 +33,7 @@ export const FileInput = ({ onChange, ...props }: FileInputProps) => {
             image={file ? URL.createObjectURL(file) : ""}
             sx={{
               width: "50%",
+              maxHeight: "90%",
             }}
           />
         ) : (
