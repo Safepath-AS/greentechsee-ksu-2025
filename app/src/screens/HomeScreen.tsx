@@ -30,7 +30,7 @@ export const HomeScreen = () => {
           .filter(
             (product) =>
               tagIds.length === 0 ||
-              tagIds.every((tagId) => product.tagIds.includes(tagId))
+              tagIds.every((tagId) => product.tagIds?.includes(tagId))
           )
           .map((product) => (
             <Grid key={product.id} size={12}>

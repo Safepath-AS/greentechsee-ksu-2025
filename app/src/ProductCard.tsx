@@ -69,7 +69,7 @@ export const ProductCard = ({ product, onTagClick }: ProductCardProps) => {
             {product.description}
           </Typography>
           <Grid container spacing={1} sx={{ marginTop: 1 }}>
-            {product.tagIds.map((tagId) => (
+            {product.tagIds?.map((tagId) => (
               <Grid key={tagId}>
                 <TagChipById
                   tagId={tagId}
