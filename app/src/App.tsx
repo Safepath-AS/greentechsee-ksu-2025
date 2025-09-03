@@ -5,17 +5,31 @@ import {
   Typography,
   type Breakpoint,
 } from "@mui/material";
+import { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { Fallback } from "./Fallback";
-import { theme } from "./theme";
-import { Home } from "./Home";
 import { ClearDbButton } from "./ClearDbButton";
+import { Fallback } from "./Fallback";
 import { HeaderBar } from "./HeaderBar";
 import { LabelCard } from "./LabelCard";
+import { Screen } from "./Screen";
+import { ScreenContext } from "./ScreenContext";
+import { theme } from "./theme";
 
 export const CONTAINER_MAX_WIDTH: Breakpoint = "md";
 
 export const App = () => {
+  const [screens, setScreens] = useState({
+    addProduct: false,
+    addTag: false,
+  });
+
+  const setAddProductDialogOpen = (open: boolean) => {
+    setScreens((prev) => ({ ...prev, addProduct: open }));
+  };
+  const setAddTagDialogOpen = (open: boolean) => {
+    setScreens((prev) => ({ ...prev, addTag: open }));
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <HeaderBar />
@@ -23,7 +37,16 @@ export const App = () => {
         <CssBaseline />
         <ErrorBoundary FallbackComponent={Fallback}>
           <LabelCard />
-          <Home />
+          <ScreenContext.Provider
+            value={{
+              addProductDialogOpen: screens.addProduct,
+              setAddProductDialogOpen,
+              addTagDialogOpen: screens.addTag,
+              setAddTagDialogOpen,
+            }}
+          >
+            <Screen />
+          </ScreenContext.Provider>
         </ErrorBoundary>
         <Typography sx={{ marginTop: 4 }}>
           versjon {import.meta.env.VITE_VERSION}

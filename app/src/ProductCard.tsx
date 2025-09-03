@@ -30,7 +30,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           {product.name}
         </Typography>
         <Typography variant="h4" sx={{ fontSize: 13.5 }}>
-          Kjøpt: {Date.parse(product.id)} <br />
+          Kjøpt: {new Date(product.boughtAt).toISOString()} <br />
           EAN: ee <br />
           Artikkelnummer: {product.modelNumber} <br />
           Serie: Drillserie

@@ -1,0 +1,42 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      navigation:
+        specifier: ^6.3.0
+        version: 6.3.0
+      navigation-react:
+        specifier: ^4.13.0
+        version: 4.13.0(navigation@6.3.0)(react@19.1.1)
+
+packages:
+
+  navigation-react@4.13.0:
+    resolution: {integrity: sha512-ch7xEWez1WvzmBxG6UbK+iC2s90vSDWJ5bx9BiXh7YFvAGh+OpsKdqmBOntwpeB8te4tjZC7oN6JhQ8yZ3N7fA==}
+    peerDependencies:
+      navigation: '*'
+      react: '*'
+
+  navigation@6.3.0:
+    resolution: {integrity: sha512-FzpKHKcqn0c1Qcm6e6UHSJY2TvIWHHXMRYzSHXdCVOTnnMQO012gzsqtxu5aCD4qNK9ffAgn48wOn3umczgVaw==}
+
+  react@19.1.1:
+    resolution: {integrity: sha512-w8nqGImo45dmMIfljjMwOGtbmC/mk4CMYhWIicdSflH91J9TyCyczcPFXJzrZ/ZXcgGRFeP6BU0BEJTw6tZdfQ==}
+    engines: {node: '>=0.10.0'}
+
+snapshots:
+
+  navigation-react@4.13.0(navigation@6.3.0)(react@19.1.1):
+    dependencies:
+      navigation: 6.3.0
+      react: 19.1.1
+
+  navigation@6.3.0: {}
+
+  react@19.1.1: {}
