@@ -23,7 +23,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         component="img"
         image={product.imageData}
         sx={{
-          width: "50%",
+          width: "40%",
+          maxHeight: 100,
         }}
       />
       <CardContent>
