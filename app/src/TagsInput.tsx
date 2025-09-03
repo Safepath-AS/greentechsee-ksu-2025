@@ -1,5 +1,5 @@
 import AddIcon from "@mui/icons-material/Add";
-import { Chip, Stack } from "@mui/material";
+import { Chip, Grid } from "@mui/material";
 import { useDb } from "./db";
 
 const TAG_NAMES = [
@@ -74,31 +74,35 @@ export const TagsInput = ({ value, onChange }: TagsInputProps) => {
 
   return (
     <>
-      <Stack spacing={1} direction="row">
+      <Grid container spacing={1} direction="row">
         {tags.map((tag) => (
-          <Chip
-            variant={value?.includes(tag.id) ? "filled" : "outlined"}
-            key={tag.id}
-            label={tag.name}
-            onClick={() => {
-              if (value?.includes(tag.id)) {
-                onChange(value?.filter((t) => t !== tag.id));
-              } else {
-                onChange([...(value || []), tag.id]);
-              }
-            }}
-          />
+          <Grid key={tag.id}>
+            <Chip
+              variant={value?.includes(tag.id) ? "filled" : "outlined"}
+              key={tag.id}
+              label={tag.name}
+              onClick={() => {
+                if (value?.includes(tag.id)) {
+                  onChange(value?.filter((t) => t !== tag.id));
+                } else {
+                  onChange([...(value || []), tag.id]);
+                }
+              }}
+            />
+          </Grid>
         ))}
-        <Chip
-          icon={<AddIcon fontSize="small" />}
-          label="Legg til"
-          onClick={() =>
-            addTag({
-              name: TAG_NAMES[Math.floor(Math.random() * TAG_NAMES.length)],
-            })
-          }
-        />
-      </Stack>
+        <Grid>
+          <Chip
+            icon={<AddIcon fontSize="small" />}
+            label="Legg til"
+            onClick={() =>
+              addTag({
+                name: TAG_NAMES[Math.floor(Math.random() * TAG_NAMES.length)],
+              })
+            }
+          />
+        </Grid>
+      </Grid>
     </>
   );
 };

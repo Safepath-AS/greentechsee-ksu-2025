@@ -1,6 +1,7 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import dayjs from "dayjs";
-import type { Product } from "./db";
+import { type Product } from "./db";
+import { TagChipById } from "./TagChipById";
 
 export type ProductCardProps = {
   product: Product;
@@ -39,6 +40,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         <Typography variant="h6" sx={{ fontSize: 13.5, color: "gray" }}>
           {product.description}
         </Typography>
+        <Grid container spacing={1} sx={{ marginTop: 1 }}>
+          {product.tagIds.map((tagId) => (
+            <Grid key={tagId}>
+              <TagChipById tagId={tagId} />
+            </Grid>
+          ))}
+        </Grid>
       </CardContent>
     </Card>
   );
