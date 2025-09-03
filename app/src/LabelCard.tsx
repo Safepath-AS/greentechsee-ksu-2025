@@ -10,7 +10,6 @@ export const LabelCard = () => {
       <Typography sx={{ paddingTop: 2 }}>
         <Button
           sx={{
-            all: "unset",
             marginRight: 1,
             paddingRight: 1,
             paddingLeft: 1,
@@ -20,14 +19,13 @@ export const LabelCard = () => {
             borderRadius: 4,
             borderWidth: 1,
             cursor: "pointer",
-            fontSize: "90%",
+            color: "unset",
           }}
         >
           Kjøkken
         </Button>
         <Button
           sx={{
-            all: "unset",
             marginRight: 1,
             paddingRight: 1,
             paddingLeft: 1,
@@ -37,14 +35,13 @@ export const LabelCard = () => {
             borderRadius: 4,
             borderWidth: 1,
             cursor: "pointer",
-            fontSize: "90%",
+            color: "unset",
           }}
         >
           Bad
         </Button>
         <Button
           sx={{
-            all: "unset",
             marginRight: 1,
             paddingRight: 1,
             paddingLeft: 1,
@@ -54,14 +51,13 @@ export const LabelCard = () => {
             borderRadius: 4,
             borderWidth: 1,
             cursor: "pointer",
-            fontSize: "90%",
+            color: "unset",
           }}
         >
           Garasje
         </Button>
         <Button
           sx={{
-            all: "unset",
             marginRight: 1,
             paddingRight: 1,
             paddingLeft: 1,
@@ -71,7 +67,7 @@ export const LabelCard = () => {
             borderRadius: 4,
             borderWidth: 1,
             cursor: "pointer",
-            fontSize: "90%",
+            color: "unset",
           }}
         >
           Stue
