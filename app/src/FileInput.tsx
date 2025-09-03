@@ -1,6 +1,7 @@
 import { CardMedia } from "@mui/material";
 import { MuiFileInput, type MuiFileInputProps } from "mui-file-input";
 import { useState } from "react";
+import { toBase64 } from "./utils";
 
 export interface FileInputProps
   extends Omit<MuiFileInputProps, "value" | "onChange"> {
@@ -31,11 +32,3 @@ export const FileInput = ({ onChange, ...props }: FileInputProps) => {
     </>
   );
 };
-
-const toBase64 = (file: File) =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-  });
