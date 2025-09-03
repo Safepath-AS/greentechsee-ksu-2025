@@ -13,6 +13,7 @@ import { TagChipById } from "./TagChipById";
 
 export type ProductCardProps = {
   product: Product;
+  onTagClick?: (tagId: string) => void;
 };
 
 interface FieldProps {
@@ -26,7 +27,7 @@ const Field = ({ label, value }: FieldProps) => (
   </div>
 );
 
-export const ProductCard = ({ product }: ProductCardProps) => {
+export const ProductCard = ({ product, onTagClick }: ProductCardProps) => {
   return (
     <Card
       variant="outlined"
@@ -69,7 +70,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <Grid container spacing={1} sx={{ marginTop: 1 }}>
             {product.tagIds.map((tagId) => (
               <Grid key={tagId}>
-                <TagChipById tagId={tagId} />
+                <TagChipById
+                  tagId={tagId}
+                  selected
+                  onClick={() => onTagClick?.(tagId)}
+                />
               </Grid>
             ))}
           </Grid>

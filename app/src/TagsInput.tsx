@@ -1,6 +1,7 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Chip, Grid } from "@mui/material";
 import { useDb } from "./db";
+import { TagChip } from "./TagChip";
 
 const TAG_NAMES = [
   "Elektronikk",
@@ -77,10 +78,10 @@ export const TagsInput = ({ value, onChange }: TagsInputProps) => {
       <Grid container spacing={1} direction="row">
         {tags.map((tag) => (
           <Grid key={tag.id}>
-            <Chip
-              variant={value?.includes(tag.id) ? "filled" : "outlined"}
+            <TagChip
+              selected={value?.includes(tag.id)}
               key={tag.id}
-              label={tag.name}
+              tag={tag}
               onClick={() => {
                 if (value?.includes(tag.id)) {
                   onChange(value?.filter((t) => t !== tag.id));
