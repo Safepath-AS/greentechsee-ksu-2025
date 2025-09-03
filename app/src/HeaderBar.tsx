@@ -1,6 +1,7 @@
-import { Box, Toolbar } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
+import { Box, Toolbar, IconButton } from "@mui/material";
 import MyThingsLogo from "./images/MyThings-logo.svg";
+import Profile from "./images/Profile.svg";
+import Notification from "./images/Notification.svg";
 
 export const HeaderBar = () => {
   return (
@@ -13,7 +14,17 @@ export const HeaderBar = () => {
           sx={{ height: 30, mr: 2, paddingTop: 1 }}
         />
       </Box>
-      <Avatar sx={{ flexGrow: 0 }}></Avatar>
+      <IconButton sx={{}}>
+        <Box
+          component="img"
+          src={Notification}
+          alt="Notifications"
+          sx={{ height: 40 }}
+        />
+      </IconButton>
+      <IconButton sx={{}}>
+        <Box component="img" src={Profile} alt="profile" sx={{ height: 40 }} />
+      </IconButton>
     </Toolbar>
   );
 };
